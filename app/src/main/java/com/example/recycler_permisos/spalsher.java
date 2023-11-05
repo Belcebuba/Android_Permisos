@@ -55,7 +55,7 @@ public class spalsher extends Activity {
         for (String permission : permissionsToCheck) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 allPermissionsGranted = false;
-                break; // Si uno de los permisos no está otorgado, no necesitas verificar los demás
+                break;
             }
         }
 

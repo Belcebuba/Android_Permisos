@@ -22,7 +22,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/gakster"
-        android:label="Fin Temporada 1"
+        android:label="Permisos (?)"
         android:roundIcon="@drawable/gakster"
         android:supportsRtl="true"
         android:theme="@style/Theme.Recycler_permisos"

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -35,14 +34,12 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
         ListaPermisos.add(new Permiso(Manifest.permission.CAMERA, "Cámara"));
         ListaPermisos.add(new Permiso(Manifest.permission.ACCESS_FINE_LOCATION, "Localización"));
 
-        // Verificar si todos los permisos están otorgados
         if (checkPermissions()) {
-            // Iniciar la tercera actividad
+            // Iniciar PantallaPrincipal
             Intent intent = new Intent(this, PantallaPrincipal.class);
             startActivity(intent);
-            finish(); // Opcional: Finalizar esta actividad para que el usuario no pueda regresar a ella
+            finish();
         } else {
-            // Si no se otorgan todos los permisos, mostrar la interfaz de permisos en MainActivity
             RecyclerView rvPermisos = findViewById(R.id.rvpermiso);
             rvPermisos.setLayoutManager(new LinearLayoutManager(this));
             rvPermisos.setHasFixedSize(true);
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
                 if (isChecked) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
                         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1987);
-                    }else {
+                    } else {
                         llamar();
                     }
                 }
@@ -76,9 +73,11 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
 
             case "Localización":
                 if (isChecked) {
-                   if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
-                       ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1989);
-                   }
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1989);
+                    } else {
+                        torcerleDireccion();
+                    }
                 }
                 break;
         }
@@ -87,25 +86,51 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==1987){
-            if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                llamar();
+        if (requestCode == 1987) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (checkPermissions()) {
+                    // PantallaPrincipal
+                    Intent intent = new Intent(this, PantallaPrincipal.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    permisosOPlomo();
+                }
             }
-        } else if (requestCode==1988) {
-            if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                abrirCamara();
+        } else if (requestCode == 1988) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (checkPermissions()) {
+                    Intent intent = new Intent(this, PantallaPrincipal.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    permisosOPlomo();
+                }
             }
-        } else if (requestCode==1989) {
-            if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                torcerleDireccion();
+        } else if (requestCode == 1989) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (checkPermissions()) {
+                    Intent intent = new Intent(this, PantallaPrincipal.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    permisosOPlomo();
+                       }
             }
         }
     }
-    public void llamar(){
+
+    public void llamar() {
     }
-    public void abrirCamara(){
+
+    public void abrirCamara() {
     }
-    public void torcerleDireccion(){
+
+    public void torcerleDireccion() {
+    }
+
+    public void permisosOPlomo() {
+        Toast.makeText(this, "Se requieren todos los permisos para continuar", Toast.LENGTH_SHORT).show();
     }
 
     private boolean checkPermissions() {
