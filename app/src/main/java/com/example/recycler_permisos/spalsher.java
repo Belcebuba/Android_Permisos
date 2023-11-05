@@ -43,7 +43,6 @@ public class spalsher extends Activity {
         Timer tiempo = new Timer();
         tiempo.schedule(tarea, 3000);
     }
-
     private void checkAllPermissions() {
         String[] permissionsToCheck = {
                 android.Manifest.permission.CALL_PHONE,
@@ -51,25 +50,23 @@ public class spalsher extends Activity {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
         };
 
-        boolean anyPermissionGranted = false;
-        StringBuilder grantedPermissions = new StringBuilder();
+        boolean allPermissionsGranted = true;
 
         for (String permission : permissionsToCheck) {
-            if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
-                grantedPermissions.append(permission).append("\n");
-                anyPermissionGranted = true;
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                allPermissionsGranted = false;
+                break; // Si uno de los permisos no está otorgado, no necesitas verificar los demás
             }
         }
 
-        if (anyPermissionGranted) {
-            final String permissionsMessage = grantedPermissions.toString();
+        if (allPermissionsGranted) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(spalsher.this, "Permisos otorgados:\n" + permissionsMessage, Toast.LENGTH_LONG).show();
+                    activityToStart = 1;
                 }
             });
-            activityToStart = 1;
         }
     }
+
 }
