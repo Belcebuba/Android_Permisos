@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
 
         ListaPermisos.add(new Permiso(Manifest.permission.CALL_PHONE, "Llamar"));
         ListaPermisos.add(new Permiso(Manifest.permission.CAMERA, "Cámara"));
-        ListaPermisos.add(new Permiso(Manifest.permission.ACCESS_FINE_LOCATION, "Localización"));
+
 
         if (checkPermissions()) {
-            // Iniciar PantallaPrincipal
+
             Intent intent = new Intent(this, PantallaPrincipal.class);
             startActivity(intent);
             finish();
@@ -71,25 +71,17 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
                 }
                 break;
 
-            case "Localización":
-                if (isChecked) {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1989);
-                    } else {
-                        torcerleDireccion();
-                    }
-                }
-                break;
+
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1987) {
+        if (requestCode == 666) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (checkPermissions()) {
-                    // PantallaPrincipal
+
                     Intent intent = new Intent(this, PantallaPrincipal.class);
                     startActivity(intent);
                     finish();
@@ -97,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
                     permisosOPlomo();
                 }
             }
-        } else if (requestCode == 1988) {
+        } else if (requestCode == 666) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (checkPermissions()) {
                     Intent intent = new Intent(this, PantallaPrincipal.class);
@@ -107,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
                     permisosOPlomo();
                 }
             }
-        } else if (requestCode == 1989) {
+        } else if (requestCode == 666) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (checkPermissions()) {
                     Intent intent = new Intent(this, PantallaPrincipal.class);
@@ -136,10 +128,8 @@ public class MainActivity extends AppCompatActivity implements PermisoAdapter.On
     private boolean checkPermissions() {
         int llamarPermiso = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int camaraPermiso = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        int localizacionPermiso = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         return llamarPermiso == PackageManager.PERMISSION_GRANTED &&
-                camaraPermiso == PackageManager.PERMISSION_GRANTED &&
-                localizacionPermiso == PackageManager.PERMISSION_GRANTED;
+                camaraPermiso == PackageManager.PERMISSION_GRANTED ;
     }
 }

@@ -47,7 +47,7 @@ public class spalsher extends Activity {
         String[] permissionsToCheck = {
                 android.Manifest.permission.CALL_PHONE,
                 android.Manifest.permission.CAMERA,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+
         };
 
         boolean allPermissionsGranted = true;

@@ -12,18 +12,15 @@
         android:required="false" />
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
 
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/gakster"
-        android:label="Permisos (?)"
-        android:roundIcon="@drawable/gakster"
+        android:icon="@drawable/animation___1697099431547"
+        android:label="Permisos"
+        android:roundIcon="@drawable/animation___1697099431547"
         android:supportsRtl="true"
         android:theme="@style/Theme.Recycler_permisos"
         tools:targetApi="31">

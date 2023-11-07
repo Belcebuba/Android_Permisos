@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="110dp"
-    android:background="@color/seed"
+    android:background="#351012"
     android:layout_margin="10dp"
     android:padding="15dp"
     >
@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Permiso"
-        android:fontFamily="@font/inscryptionact2"
-        android:textColor="@color/white"
+
+        android:textColor="#FFFFFF"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
